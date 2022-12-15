@@ -31,20 +31,20 @@
     gap: 5px;
 }
 
-div.buttons{
+button.buttons{
     border: black solid 1px;
     line-height: 100px;
     border-radius: 9px;
 }
 
-div.numbers{
+button.numbers{
     background-color: lightgray;
 }
 
-div.operation{
+button.operation{
     background-color: aquamarine;
 }
 
-div.equate{
+button.equate{
     background-color: orangered;
 }
