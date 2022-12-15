@@ -44,13 +44,18 @@ let divide=document.getElementById('divide');
 divide.addEventListener("click", display);
 
 let clear=document.getElementById('clear');
-clear.addEventListener("click", display);
+clear.addEventListener("click", clear);
 
 let equate=document.getElementById('equate');
-equate.addEventListener("click", display);
+equate.addEventListener("click", display); 
+
+//let display=document.getElementById('display');
 
 
 function display()
 {
     console.log(this.value);
+    arr.push(this.value);
+    console.log(arr);
+    document.getElementById('display').innerHTML=arr.join('');
 }
