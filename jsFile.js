@@ -2,6 +2,9 @@ let arr=[];
 let res=0;
 let operatorFlag=0;
 let decimalFlag=0
+let operator='';
+let currentValue='';
+let previousValue='';
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -61,33 +64,53 @@ divide.addEventListener("click", function(){ getOperator(this.value); });
 let clear=document.getElementById('clear');
 clear.addEventListener("click", clearAll);
 
-let equate=document.getElementById('equate');
-equate.addEventListener("click", display); 
+/*let equate=document.getElementById('equate');
+equate.addEventListener("click", display);*/
 
-//let display=document.getElementById('display');
-
+let previousScreen=document.getElementById('previousScreen');
+let currentScreen=document.getElementById('currentScreen');
 
 function display()
 {
-    document.getElementById('display').innerHTML=arr.join('');
+    document.getElementById('currentScreen').innerHTML=arr.join('');
+    //console.log(typeof(currentScreen.textContent));
 }
 
 function getNumber(num)
 {
     arr.push(num);
     console.log(arr.join(''));
-    operatorFlag=0;
+    operatorFlag=0;             //set opflag to zero. thus disabling operators to print together
     display();
+
+    //new stuff from here
+
+    currentValue=currentScreen.textContent; // first value entered by user stored in currentValue
+    console.log(`current value is: ${currentValue}`);
+
 }
 
-function getOperator(num)
+function getOperator(op)
 {
     if(operatorFlag===0)
     {
-        arr.push(num);
+        operator=op;
+        arr.join(op);
+
+        //new stuff from here
+
+        previousValue=currentValue;
+        currentValue='';
+        previousScreen.textContent=previousValue+''+operator;
+        currentScreen.textContent='';               //resetting the currentScreen
+        arr=[]              //resetting array of display elements
+
+        console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`)
+        //display();
+    
+    
     }    
     operatorFlag=1;
-    display();
 }
 
 function clearAll()
