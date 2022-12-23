@@ -1,5 +1,4 @@
-let arr=[];
-let res=0;
+let 0;
 let operatorFlag=0;
 let decimalFlag=0
 let operator='';
@@ -64,57 +63,71 @@ divide.addEventListener("click", function(){ getOperator(this.value); });
 let clear=document.getElementById('clear');
 clear.addEventListener("click", clearAll);
 
-/*let equate=document.getElementById('equate');
-equate.addEventListener("click", display);*/
+let equate=document.getElementById('equate');
+equate.addEventListener("click", operation);
 
 let previousScreen=document.getElementById('previousScreen');
 let currentScreen=document.getElementById('currentScreen');
 
-function display()
-{
-    document.getElementById('currentScreen').innerHTML=arr.join('');
-    //console.log(typeof(currentScreen.textContent));
-}
 
 function getNumber(num)
 {
-    arr.push(num);
-    console.log(arr.join(''));
-    operatorFlag=0;             //set opflag to zero. thus disabling operators to print together
-    display();
-
     //new stuff from here
-
-    currentValue=currentScreen.textContent; // first value entered by user stored in currentValue
+    currentScreen.textContent=num;
+    currentValue+=num;              //concatenates the numbers into the string
+    currentScreen.textContent=currentValue;
     console.log(`current value is: ${currentValue}`);
 
 }
 
 function getOperator(op)
 {
-    if(operatorFlag===0)
-    {
-        operator=op;
-        arr.join(op);
+    operator=op;
+    previousValue=currentValue;
+    currentValue='';
+    previousScreen.textContent=previousValue+' '+operator;
+    currentScreen.textContent='';
 
-        //new stuff from here
-
-        previousValue=currentValue;
-        currentValue='';
-        previousScreen.textContent=previousValue+''+operator;
-        currentScreen.textContent='';               //resetting the currentScreen
-        arr=[]              //resetting array of display elements
-
-        console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`)
-        //display();
-    
-    
-    }    
-    operatorFlag=1;
+    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
 }
 
 function clearAll()
 {
-    arr=[];
-    display();  
+    currentScreen.textContent='';
+    previousScreen.textContent='';
+    previousValue='';
+    currentValue='';
+}
+
+function operation(previousValue,currentValue,operator)
+{
+    previousValue=parseInt(previousValue);
+    currentValue=parseInt(currentValue);
+
+    if(operator === '+')
+    {
+        previousValue+=currentValue;    
+    }
+    else if(operator === '-')
+    {
+        previousValue-=currentValue;
+    }
+    else if(operator === '*')
+    {
+        previousValue*=currentValue;
+    }
+    else
+    {   
+        if(currentValue !== 0)
+        {
+            previousValue/=currentValue;
+        }
+        else
+        {
+            console.log("division by zero isn't possible.");
+            clearAll();
+        }
+        
+    }
+    return previousValue;
 }
