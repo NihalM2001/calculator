@@ -1,4 +1,3 @@
-let 0;
 let operatorFlag=0;
 let decimalFlag=0
 let operator='';
@@ -64,7 +63,10 @@ let clear=document.getElementById('clear');
 clear.addEventListener("click", clearAll);
 
 let equate=document.getElementById('equate');
-equate.addEventListener("click", operation);
+equate.addEventListener("click", function(){
+    operation(); 
+    equal();
+});
 
 let previousScreen=document.getElementById('previousScreen');
 let currentScreen=document.getElementById('currentScreen');
@@ -72,11 +74,17 @@ let currentScreen=document.getElementById('currentScreen');
 
 function getNumber(num)
 {
-    //new stuff from here
-    currentScreen.textContent=num;
-    currentValue+=num;              //concatenates the numbers into the string
+    //currentScreen.textContent=num;
+    if(currentValue.length<8)
+    {
+        currentValue+=num;              //concatenates the numbers into the string
+    }
+    else{
+        alert("maximum limit reached")
+    }
+    
     currentScreen.textContent=currentValue;
-    console.log(`current value is: ${currentValue}`);
+    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
 
 }
 
@@ -89,6 +97,8 @@ function getOperator(op)
     currentScreen.textContent='';
 
     console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
+
+    //console.log(previousValue);
 }
 
 function clearAll()
@@ -97,12 +107,13 @@ function clearAll()
     previousScreen.textContent='';
     previousValue='';
     currentValue='';
+    console.clear();
 }
 
-function operation(previousValue,currentValue,operator)
+function operation()
 {
-    previousValue=parseInt(previousValue);
-    currentValue=parseInt(currentValue);
+    previousValue=Number(previousValue);
+    currentValue=Number(currentValue);
 
     if(operator === '+')
     {
@@ -124,10 +135,24 @@ function operation(previousValue,currentValue,operator)
         }
         else
         {
-            console.log("division by zero isn't possible.");
+            alert("division by zero isn't possible.");
             clearAll();
         }
         
     }
-    return previousValue;
+    currentValue='';
+    previousValue=round(previousValue);
+    previousValue=previousValue.toString();
+    currentValue=currentValue.toString();
+}
+
+function equal()
+{
+    currentScreen.textContent=previousValue;
+    previousScreen.textContent='';
+}
+
+function round(num)
+{
+    return Math.round(num*1000) /1000;
 }
