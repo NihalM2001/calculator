@@ -65,7 +65,7 @@ clear.addEventListener("click", clearAll);
 let equate=document.getElementById('equate');
 equate.addEventListener("click", function(){
     operation(); 
-    equal();
+    equalDisplay();
 });
 
 let previousScreen=document.getElementById('previousScreen');
@@ -79,18 +79,21 @@ function getNumber(num)
     {
         currentValue+=num;              //concatenates the numbers into the string
     }
-    else{
+    else
+    {
         alert("maximum limit reached")
     }
     
     currentScreen.textContent=currentValue;
-    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
+   
 
 }
 
 function getOperator(op)
 {
     operator=op;
+    //operation();
+    //operatorDisplay();
     previousValue=currentValue;
     currentValue='';
     previousScreen.textContent=previousValue+' '+operator;
@@ -146,10 +149,15 @@ function operation()
     currentValue=currentValue.toString();
 }
 
-function equal()
+function equalDisplay()             //for displaying result on clicking 'Equal'
 {
     currentScreen.textContent=previousValue;
     previousScreen.textContent='';
+}
+
+function operatorDisplay()              //for displaying results on clicking an Operator
+{
+    previous
 }
 
 function round(num)

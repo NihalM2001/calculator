@@ -1,3 +1,5 @@
+@import url("https://fonts.cdnfonts.com/css/scientific-calculator-Lcd");
+
 #container{
     display: flex;
     flex-direction: column;
@@ -20,19 +22,25 @@
     line-height: 60px;
     border-radius: 9px;
     padding: 10px;
-    background-color: rgb(22, 185, 190);
+    background-color: lightgrey;
 }
 
 #previousScreen ,#currentScreen{
     height: 30px;
     text-align: right;
+    font-family: 'Scientific Calculator LCD',sans-serif;
+    padding: 5px;
+}
+
+#currentScreen{
+    font-size: 30px;
 }
 
 #key{
     display: grid;
     grid-template-columns: repeat(4,100px);
     grid-template-rows: repeat(4,100px);
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     gap: 5px;
 }
 
@@ -40,10 +48,11 @@ button.buttons{
     border: black solid 1px;
     line-height: 100px;
     border-radius: 9px;
+    font-size: 20px;
 }
 
 button.numbers{
-    background-color: lightgray;
+   /*background-color: lightgray;*/
 }
 
 button.operation{
@@ -51,5 +60,31 @@ button.operation{
 }
 
 button.equate{
-    background-color: orangered;
+    background-color: rgb(231, 93, 42);
+    grid-column: span 4;
+}
+
+.buttons:nth-child(15){
+    grid-row: 5;
+}
+
+.buttons:nth-child(11){
+    grid-column-start: 4;
+    grid-row-start: 1;
+}
+.buttons:nth-child(12){
+    grid-row-start: 2;
+    grid-column-start: 4;
+}
+.buttons:nth-child(13){
+    grid-row-start: 3;
+    grid-column-start: 4;
+}
+.buttons:nth-child(14){
+    grid-row-start: 4;
+    grid-column-start: 4;
+}
+.decimal{
+    grid-column-start: 2;
+    grid-row-start: 4;
 }
