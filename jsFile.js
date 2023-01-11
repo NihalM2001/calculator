@@ -1,8 +1,9 @@
 let operatorFlag=0;
-let decimalFlag=0
+let decimalFlag=0;
 let operator='';
 let currentValue='';
 let previousValue='';
+let temp='';
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -83,23 +84,30 @@ function getNumber(num)
     {
         alert("maximum limit reached")
     }
-    
-    currentScreen.textContent=currentValue;
-   
 
+    temp=currentValue;
+    currentScreen.textContent=currentValue;
+    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue} and operator is ${operator}`); //for checking the currentValue and previousValue
+    
 }
 
 function getOperator(op)
 {
+    if(currentValue!==null && previousValue!==null)
+    {
+        operation();
+        operatorDisplay();
+    }
     operator=op;
-    //operation();
-    //operatorDisplay();
-    previousValue=currentValue;
+    console.log(`operator is ${operator}`);
+    previousValue=temp;
+
     currentValue='';
     previousScreen.textContent=previousValue+' '+operator;
     currentScreen.textContent='';
+    decimalFlag=0;
 
-    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
+    //console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
 
     //console.log(previousValue);
 }
@@ -111,6 +119,7 @@ function clearAll()
     previousValue='';
     currentValue='';
     console.clear();
+    location.reload();
 }
 
 function operation()
@@ -147,6 +156,7 @@ function operation()
     previousValue=round(previousValue);
     previousValue=previousValue.toString();
     currentValue=currentValue.toString();
+    console.log(previousValue);
 }
 
 function equalDisplay()             //for displaying result on clicking 'Equal'
@@ -157,7 +167,7 @@ function equalDisplay()             //for displaying result on clicking 'Equal'
 
 function operatorDisplay()              //for displaying results on clicking an Operator
 {
-    previous
+    previousScreen.textContent=previousValue+''+operator;
 }
 
 function round(num)
