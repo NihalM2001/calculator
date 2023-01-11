@@ -4,7 +4,7 @@ let operator='';
 let currentValue='';
 let previousValue='';
 let temp='';
-let flag=0;
+let flag=0;             //for swapping currentValue and previousValue
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -14,51 +14,39 @@ let two=document.getElementById('2');
 two.addEventListener("click", function(){ getNumber(this.value); } );
 
 let three=document.getElementById('3');
-//three.addEventListener("click", display);
 three.addEventListener("click", function(){ getNumber(this.value); } );
 
 let four=document.getElementById('4');
-//four.addEventListener("click", display);
 four.addEventListener("click", function(){ getNumber(this.value); } );
 
 let five=document.getElementById('5');
-//five.addEventListener("click", display);
 five.addEventListener("click", function(){ getNumber(this.value); } );
 
 let six=document.getElementById('6');
-//six.addEventListener("click", display);
 six.addEventListener("click", function(){ getNumber(this.value); } );
 
 let seven=document.getElementById('7');
-//seven.addEventListener("click", display);
 seven.addEventListener("click", function(){ getNumber(this.value); } );
 
 let eight=document.getElementById('8');
-//eight.addEventListener("click", display);
 eight.addEventListener("click", function(){ getNumber(this.value); } );
 
 let nine=document.getElementById('9');
-//nine.addEventListener("click", display);
 nine.addEventListener("click", function(){ getNumber(this.value); } );
 
 let zero=document.getElementById('0');
-//zero.addEventListener("click", display);
 zero.addEventListener("click", function(){ getNumber(this.value); } );
 
 let add=document.getElementById('add');
-//add.addEventListener("click", display);
 add.addEventListener("click", function(){ getOperator(this.value); } );
 
 let subtract=document.getElementById('subtract');
-//subtract.addEventListener("click", display);
 subtract.addEventListener("click", function(){ getOperator(this.value); } );
 
 let multiply=document.getElementById('multiply');
-//multiply.addEventListener("click", display);
 multiply.addEventListener("click", function(){ getOperator(this.value); } );
 
 let divide=document.getElementById('divide');
-//divide.addEventListener("click", display);
 divide.addEventListener("click", function(){ getOperator(this.value); });
 
 let clear=document.getElementById('clear');
@@ -91,7 +79,7 @@ function getNumber(num)
         alert("maximum limit reached")
     }
 
-    temp=currentValue;
+    temp=currentValue;               //temporary variable assigned for swapping currentValue and previousValue
     currentScreen.textContent=currentValue;
     console.log(`curVal is: ${currentValue} and preVal is: ${previousValue} and operator is ${operator}`); //for checking the currentValue and previousValue
     
@@ -106,7 +94,7 @@ function getOperator(op)
     }
     operator=op;
     console.log(`operator is ${operator}`);
-    if(flag===0)
+    if(flag===0)                            //for assigning the value of temp to previousValue only at the start of the program 
     {
         previousValue=temp;
     }
@@ -133,7 +121,12 @@ function clearAll()
 }
 
 function operation()
-{
+{   
+    if(currentValue === '' && previousValue === '')
+    {
+        alert("Enter numbers inorder to proceed with calculation");
+        location.reload();
+    }
     previousValue=Number(previousValue);
     currentValue=Number(currentValue);
 
@@ -149,10 +142,11 @@ function operation()
     {
         previousValue*=currentValue;
     }
-    else
+    else if(operator === '/')
     {   
         if(currentValue !== 0)
         {
+            console.log(`hey this is / operator. the currentValue here is: ${currentValue}`)
             previousValue/=currentValue;
         }
         else
