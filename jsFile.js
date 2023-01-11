@@ -4,6 +4,7 @@ let operator='';
 let currentValue='';
 let previousValue='';
 let temp='';
+let flag=0;
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -72,6 +73,11 @@ equate.addEventListener("click", function(){
 let previousScreen=document.getElementById('previousScreen');
 let currentScreen=document.getElementById('currentScreen');
 
+//refactoring section starts here
+
+
+
+//refactoring section ends here
 
 function getNumber(num)
 {
@@ -100,12 +106,16 @@ function getOperator(op)
     }
     operator=op;
     console.log(`operator is ${operator}`);
-    previousValue=temp;
+    if(flag===0)
+    {
+        previousValue=temp;
+    }
 
     currentValue='';
     previousScreen.textContent=previousValue+' '+operator;
     currentScreen.textContent='';
     decimalFlag=0;
+    flag=1;
 
     //console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
 
