@@ -4,7 +4,7 @@ let operator='';
 let currentValue='';
 let previousValue='';
 let temp='';
-let flag=0;             //for swapping currentValue and previousValue
+let swapFlag=0;             //for swapping currentValue and previousValue
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -58,21 +58,29 @@ equate.addEventListener("click", function(){
     equalDisplay();
 });
 
+let decimal=document.getElementById('decimal');
+decimal.addEventListener('click',function(){ getNumber(this.value);})
+
 let previousScreen=document.getElementById('previousScreen');
 let currentScreen=document.getElementById('currentScreen');
 
 //refactoring section starts here
 
-
-
 //refactoring section ends here
 
 function getNumber(num)
 {
-    //currentScreen.textContent=num;
     if(currentValue.length<8)
     {
-        currentValue+=num;              //concatenates the numbers into the string
+        if( num==='.' && decimalFlag===0)   //checks if decimalFlag is zero. Only enters decimal when decimal flag is zero
+        {
+            currentValue+=num;              //concatenates the numbers into the string  
+            decimalFlag=1;
+        }
+        else if(num!=='.')
+        {
+            currentValue+=num;
+        }
     }
     else
     {
@@ -94,7 +102,7 @@ function getOperator(op)
     }
     operator=op;
     console.log(`operator is ${operator}`);
-    if(flag===0)                            //for assigning the value of temp to previousValue only at the start of the program 
+    if(swapFlag===0)                     //for assigning the value of temp to previousValue only at the start of the program as every other time, previousValue is being updated by function operation()
     {
         previousValue=temp;
     }
@@ -102,8 +110,9 @@ function getOperator(op)
     currentValue='';
     previousScreen.textContent=previousValue+' '+operator;
     currentScreen.textContent='';
+
     decimalFlag=0;
-    flag=1;
+    swapFlag=1;
 
     //console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
 
