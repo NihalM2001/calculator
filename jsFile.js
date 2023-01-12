@@ -66,13 +66,15 @@ let currentScreen=document.getElementById('currentScreen');
 
 //refactoring section starts here
 
+
+
 //refactoring section ends here
 
 function getNumber(num)
 {
     if(currentValue.length<8)
     {
-        if( num==='.' && decimalFlag===0)   //checks if decimalFlag is zero. Only enters decimal when decimal flag is zero
+        if( num==='.' && decimalFlag===0)   //checks if decimalFlag is zero. Only enters the decimal when decimal flag is zero
         {
             currentValue+=num;              //concatenates the numbers into the string  
             decimalFlag=1;
@@ -95,7 +97,7 @@ function getNumber(num)
 
 function getOperator(op)
 {
-    if(currentValue!==null && previousValue!==null)
+    if(currentValue!==null && previousValue!==null)             //only does calculation when both currentValue and previousValue has some value
     {
         operation();
         operatorDisplay();
@@ -111,7 +113,7 @@ function getOperator(op)
     previousScreen.textContent=previousValue+' '+operator;
     currentScreen.textContent='';
 
-    decimalFlag=0;
+    decimalFlag=0;                      //resets decimalFlag to zero and thus decimal can be entered when using getNumber() function
     swapFlag=1;
 
     //console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
@@ -158,7 +160,7 @@ function operation()
             console.log(`hey this is / operator. the currentValue here is: ${currentValue}`)
             previousValue/=currentValue;
         }
-        else
+        else if(currentValue===0)
         {
             alert("division by zero isn't possible.");
             clearAll();
@@ -169,7 +171,7 @@ function operation()
     previousValue=round(previousValue);
     previousValue=previousValue.toString();
     currentValue=currentValue.toString();
-    console.log(previousValue);
+    console.log(`previousValue is ${previousValue} and currentValue is ${currentValue}`);
 }
 
 function equalDisplay()             //for displaying result on clicking 'Equal'
