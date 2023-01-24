@@ -1,10 +1,11 @@
-let operatorFlag=0;
-let decimalFlag=0;
+
 let operator='';
 let currentValue='';
 let previousValue='';
 let temp='';
 let swapFlag=0;             //for swapping currentValue and previousValue
+let operatorFlag=0;
+let decimalFlag=0;
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -121,12 +122,15 @@ function getOperator(op)
     //console.log(previousValue);
 }
 
-function clearAll()
+function clearAll()                 //resets every values and clears result from the display
 {
     currentScreen.textContent='';
     previousScreen.textContent='';
     previousValue='';
     currentValue='';
+    swapFlag=0;
+    decimalFlag=0;
+    operatorFlag=0;
     console.clear();
     location.reload();
 }
@@ -178,6 +182,10 @@ function equalDisplay()             //for displaying result on clicking 'Equal'
 {
     currentScreen.textContent=previousValue;
     previousScreen.textContent='';
+
+    setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },1000);
+
+    setTimeout(() => {  clearAll();  },4000);           //calls clearAll() function after 5 seconds of presseing '='
 }
 
 function operatorDisplay()              //for displaying results on clicking an Operator
