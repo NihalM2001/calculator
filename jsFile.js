@@ -4,7 +4,6 @@ let currentValue='';
 let previousValue='';
 let temp='';
 let swapFlag=0;             //for swapping currentValue and previousValue
-let operatorFlag=0;
 let decimalFlag=0;
 
 let one=document.getElementById('1');
@@ -65,12 +64,6 @@ decimal.addEventListener('click',function(){ getNumber(this.value);})
 let previousScreen=document.getElementById('previousScreen');
 let currentScreen=document.getElementById('currentScreen');
 
-//refactoring section starts here
-
-
-
-//refactoring section ends here
-
 function getNumber(num)
 {
     if(currentValue.length<8)
@@ -98,24 +91,27 @@ function getNumber(num)
 
 function getOperator(op)
 {
-    if(currentValue!==null && previousValue!==null)             //only does calculation when both currentValue and previousValue has some value
+    if(currentValue!=='' || currentValue!==null)                    //everytime operators are click consecutively, currentvalue is null or zero. only enables operator when currentValue is not null
     {
-        operation();
-        operatorDisplay();
-    }
-    operator=op;
-    console.log(`operator is ${operator}`);
-    if(swapFlag===0)                     //for assigning the value of temp to previousValue only at the start of the program as every other time, previousValue is being updated by function operation()
-    {
-        previousValue=temp;
-    }
+        if(currentValue!==null && previousValue!==null)             //only does calculation when both currentValue and previousValue has some value
+        {
+            operation();
+            operatorDisplay();
+        }
+        operator=op;
+        console.log(`operator is ${operator}`);
+        if(swapFlag===0)                     //for assigning the value of temp to previousValue only at the start of the program as every other time, previousValue is being updated by function operation()
+        {
+            previousValue=temp;
+        }
 
-    currentValue='';
-    previousScreen.textContent=previousValue+' '+operator;
-    currentScreen.textContent='';
-
+        currentValue='';
+        previousScreen.textContent=previousValue+' '+operator;
+        currentScreen.textContent='';
+        }
+    
     decimalFlag=0;                      //resets decimalFlag to zero and thus decimal can be entered when using getNumber() function
-    swapFlag=1;
+    swapFlag=1;                     
 
     //console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
 
@@ -130,7 +126,6 @@ function clearAll()                 //resets every values and clears result from
     currentValue='';
     swapFlag=0;
     decimalFlag=0;
-    operatorFlag=0;
     console.clear();
     location.reload();
 }
@@ -183,9 +178,9 @@ function equalDisplay()             //for displaying result on clicking 'Equal'
     currentScreen.textContent=previousValue;
     previousScreen.textContent='';
 
-    setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },1000);
+    /*setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },000);
 
-    setTimeout(() => {  clearAll();  },4000);           //calls clearAll() function after 5 seconds of presseing '='
+    setTimeout(() => {  clearAll();  },4000);           //calls clearAll() function after 5 seconds of presseing '='*/
 }
 
 function operatorDisplay()              //for displaying results on clicking an Operator
