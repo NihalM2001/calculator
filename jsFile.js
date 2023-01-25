@@ -107,7 +107,7 @@ function getOperator(op)
         currentValue='';
         previousScreen.textContent=previousValue+' '+operator;
         currentScreen.textContent='';
-        }
+    }
     
     decimalFlag=0;                                                  //resets decimalFlag to zero and thus decimal can be entered when using getNumber() function
     swapFlag=1;                     
@@ -174,12 +174,12 @@ function operation()
 
 function equalDisplay()                                             //for displaying result on clicking 'Equal'
 {
-    currentScreen.textContent=previousValue;
+    currentScreen.textContent=' = '+previousValue;
     previousScreen.textContent='';
 
-    setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },000);
+    setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },3000);
 
-    setTimeout(() => {  clearAll();  },4000);                       //calls clearAll() function after 4 seconds of presseing '='
+    setTimeout(() => {  clearAll();  },5000);                       //calls clearAll() function after 4 seconds of presseing '='
 }
 
 function operatorDisplay()                                          //for displaying results on clicking an Operator
