@@ -51,10 +51,6 @@ button.buttons{
     font-size: 20px;
 }
 
-button.numbers{
-   /*background-color: lightgray;*/
-}
-
 button.operation{
     background-color: aquamarine;
 }
