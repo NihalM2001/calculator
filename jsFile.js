@@ -3,14 +3,13 @@ let operator='';
 let currentValue='';
 let previousValue='';
 let temp='';
-let swapFlag=0;             //for swapping currentValue and previousValue
-let decimalFlag=0;
+let swapFlag=0;                                                         //for swapping currentValue and previousValue
+let decimalFlag=0;                                                      //for enabling decimal only once for a number
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
 
 let two=document.getElementById('2');
-//two.addEventListener("click", display);
 two.addEventListener("click", function(){ getNumber(this.value); } );
 
 let three=document.getElementById('3');
@@ -68,9 +67,9 @@ function getNumber(num)
 {
     if(currentValue.length<8)
     {
-        if( num==='.' && decimalFlag===0)   //checks if decimalFlag is zero. Only enters the decimal when decimal flag is zero
+        if( num==='.' && decimalFlag===0)                           //checks if decimalFlag is zero. Only enters the decimal when decimal flag is zero. Reset after pressing operator
         {
-            currentValue+=num;              //concatenates the numbers into the string  
+            currentValue+=num;                                      //concatenates the numbers into the string  
             decimalFlag=1;
         }
         else if(num!=='.')
@@ -83,9 +82,9 @@ function getNumber(num)
         alert("maximum limit reached")
     }
 
-    temp=currentValue;               //temporary variable assigned for swapping currentValue and previousValue
+    temp=currentValue;                                              //temporary variable assigned for swapping currentValue and previousValue
     currentScreen.textContent=currentValue;
-    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue} and operator is ${operator}`); //for checking the currentValue and previousValue
+    console.log(`curVal is: ${currentValue} and preVal is: ${previousValue} and operator is ${operator}`);                  //for checking the currentValue and previousValue
     
 }
 
@@ -100,7 +99,7 @@ function getOperator(op)
         }
         operator=op;
         console.log(`operator is ${operator}`);
-        if(swapFlag===0)                     //for assigning the value of temp to previousValue only at the start of the program as every other time, previousValue is being updated by function operation()
+        if(swapFlag===0)                                            //for assigning the value of temp to previousValue only at the start of the program as every other time. Else, updated by function operation()
         {
             previousValue=temp;
         }
@@ -110,7 +109,7 @@ function getOperator(op)
         currentScreen.textContent='';
         }
     
-    decimalFlag=0;                      //resets decimalFlag to zero and thus decimal can be entered when using getNumber() function
+    decimalFlag=0;                                                  //resets decimalFlag to zero and thus decimal can be entered when using getNumber() function
     swapFlag=1;                     
 
     //console.log(`curVal is: ${currentValue} and preVal is: ${previousValue}`);
@@ -118,7 +117,7 @@ function getOperator(op)
     //console.log(previousValue);
 }
 
-function clearAll()                 //resets every values and clears result from the display
+function clearAll()                                                 //resets every values and clears result from the display
 {
     currentScreen.textContent='';
     previousScreen.textContent='';
@@ -173,17 +172,17 @@ function operation()
     console.log(`previousValue is ${previousValue} and currentValue is ${currentValue}`);
 }
 
-function equalDisplay()             //for displaying result on clicking 'Equal'
+function equalDisplay()                                             //for displaying result on clicking 'Equal'
 {
     currentScreen.textContent=previousValue;
     previousScreen.textContent='';
 
-    /*setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },000);
+    setTimeout(() => {  alert("Reloading the webpage. Resetting all values");  },000);
 
-    setTimeout(() => {  clearAll();  },4000);           //calls clearAll() function after 5 seconds of presseing '='*/
+    setTimeout(() => {  clearAll();  },4000);                       //calls clearAll() function after 4 seconds of presseing '='
 }
 
-function operatorDisplay()              //for displaying results on clicking an Operator
+function operatorDisplay()                                          //for displaying results on clicking an Operator
 {
     previousScreen.textContent=previousValue+''+operator;
 }
