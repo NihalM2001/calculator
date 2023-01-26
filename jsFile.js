@@ -1,10 +1,10 @@
 
 let operator='';
-let currentValue='';
-let previousValue='';
+let currentValue='';                                                //value actively entered by user
+let previousValue='';                                               //value that is used to store the value entered by user
 let temp='';
-let swapFlag=0;                                                         //for swapping currentValue and previousValue
-let decimalFlag=0;                                                      //for enabling decimal only once for a number
+let swapFlag=0;                                                     //for swapping currentValue and previousValue
+let decimalFlag=0;                                                  //for enabling decimal only once for a number
 
 let one=document.getElementById('1');
 one.addEventListener("click", function(){ getNumber(this.value); } );
@@ -53,8 +53,16 @@ clear.addEventListener("click", clearAll);
 
 let equate=document.getElementById('equate');
 equate.addEventListener("click", function(){
-    operation(); 
-    equalDisplay();
+    if(operator==='')                                               //condition to print result when '=' is pressed with only one value
+    {
+        previousValue=currentValue;
+        equalDisplay();
+    }
+    else
+    {
+        operation(); 
+        equalDisplay();
+    }
 });
 
 let decimal=document.getElementById('decimal');
