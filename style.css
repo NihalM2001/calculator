@@ -67,6 +67,10 @@ button.equate{
     background-color: rgb(231, 93, 42);
     grid-column: span 4;
 }
+.buttons:hover{
+    scale: 1.1;
+    transition: 500ms;
+}
 
 .buttons:nth-child(15){
     grid-row: 5;
